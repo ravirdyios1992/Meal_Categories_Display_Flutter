@@ -9,6 +9,7 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
+  final Function removeItem;
 
   MealItem(
       {@required this.id,
@@ -16,48 +17,55 @@ class MealItem extends StatelessWidget {
       @required this.imageUrl,
       @required this.duration,
       @required this.complexity,
-      @required this.affordability});
+      @required this.affordability,
+      @required this.removeItem});
 
-      String get complexityText {
-        switch (complexity) {
-          case Complexity.Simple:
-          return 'Simple';
-          break;
+  String get complexityText {
+    switch (complexity) {
+      case Complexity.Simple:
+        return 'Simple';
+        break;
 
-          case Complexity.Challenging:
-          return 'Challenging';
-          break;
+      case Complexity.Challenging:
+        return 'Challenging';
+        break;
 
-          case Complexity.Hard:
-          return 'Hard';
-          break;
+      case Complexity.Hard:
+        return 'Hard';
+        break;
 
-          default:
-          return 'Unknow';
-        }
-      }
+      default:
+        return 'Unknow';
+    }
+  }
 
-      String get affordabilityText {
-        switch (affordability) {
-          case Affordability.Affordable:
-          return 'Affordable';
-          break;
+  String get affordabilityText {
+    switch (affordability) {
+      case Affordability.Affordable:
+        return 'Affordable';
+        break;
 
-          case Affordability.Pricey:
-          return 'Pricey';
-          break;
+      case Affordability.Pricey:
+        return 'Pricey';
+        break;
 
-          case Affordability.Luxurious:
-          return 'Luxurious';
-          break;
+      case Affordability.Luxurious:
+        return 'Luxurious';
+        break;
 
-          default:
-          return 'Unknow';
-        }
-      }
+      default:
+        return 'Unknow';
+    }
+  }
 
   void selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(MealDetailScreen.routeName, arguments: id);
+    Navigator.of(context)
+        .pushNamed(MealDetailScreen.routeName, arguments: id)
+        .then((result) {
+      if (result != null) {
+        removeItem(result);
+      }
+    });
   }
 
   @override

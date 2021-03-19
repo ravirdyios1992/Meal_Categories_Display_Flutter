@@ -1,8 +1,10 @@
 
+import './screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/categories_screen.dart';
 import 'screens/category_meals_screen.dart';
 import 'screens/meal_detail_screen.dart';
+import './screens/filters_screen.dart';
 
 
 void main() {
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange,
           accentColor: Colors.amber,
           canvasColor: Color.fromRGBO(255, 254, 229, 1),
           fontFamily: 'Raleway',
@@ -31,12 +33,13 @@ class MyApp extends StatelessWidget {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'RobotoCondensed'))),
-      home: CategoriesScreen(),
-      //initialRoute: '/',
+      //home: CategoriesScreen(),
+      initialRoute: '/',
       routes: {
-       // '/' : (ctx) => CategoryMealsScreen(),
+        '/' : (ctx) => TabsScreen(),
         CategoryMealsScreen.routeName: (cntx) => CategoryMealsScreen(),
         MealDetailScreen.routeName: (cntx) => MealDetailScreen(),
+        FiltersScreen.routeName: (cntx) => FiltersScreen(),
       },
       onGenerateRoute: (settings) {
           print(settings.arguments);
